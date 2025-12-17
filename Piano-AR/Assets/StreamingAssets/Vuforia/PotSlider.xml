@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="potslider" size="1.000000 0.562500" />
+    <ImageTarget name="potslider1" size="1.000000 0.562500" />
+  </Tracking>
+</QCARConfig>

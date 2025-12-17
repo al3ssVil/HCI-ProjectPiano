@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QCARConfig>
+    <Tracking>
+        <ModelTarget name="1602A_I2C_LCDModule_Copy" trackingMode="car" motionHint="adaptive" upVector="0.0 0.0 1.0" optimizeTrackingFor="default"></ModelTarget>
+    </Tracking>
+    <Assembly name="1602A_I2C_LCDModule_Copy" assemblyId="1c12a69457df4bc680fbf410a0795e60">
+        <Part name="1602A_I2C_LCDModule_Copy" translation="0 0 0" rotation="AD: 0 0 1 0"></Part>
+        <EntryPoint name="(none)" trained="yes"></EntryPoint>
+    </Assembly>
+</QCARConfig>

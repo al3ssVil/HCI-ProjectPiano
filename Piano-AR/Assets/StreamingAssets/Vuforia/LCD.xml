@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="lcd6" size="1.000000 1.777778" />
+    <ImageTarget name="lcd5" size="1.000000 1.777778" />
+    <ImageTarget name="lcd4" size="1.000000 1.777778" />
+    <ImageTarget name="lcd3" size="1.000000 1.777778" />
+    <ImageTarget name="lcd2" size="1.000000 0.562500" />
+    <ImageTarget name="lcd1" size="1.000000 0.562500" />
+  </Tracking>
+</QCARConfig>

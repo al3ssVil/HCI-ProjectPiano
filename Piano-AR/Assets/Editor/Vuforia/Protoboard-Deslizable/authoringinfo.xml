@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v7.3.1">
+        <ModelTarget name="Protoboard-Deslizable" targetId="51ea0c09b3374ffd8435198c00068bac" version="14.0" toolVersion="v7.3.1" bbox="-0.032 -0.08525 0 0.032 0.08525 0.0100025" trackingMode="car" upVector="0.0 0.0 1.0" optimizeTrackingFor="default" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="Protoboard-Deslizable" assemblyId="74085fd6312342278a3eefaf35c41b16">
+        <Part name="Protoboard-Deslizable" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+</QCARInfo>

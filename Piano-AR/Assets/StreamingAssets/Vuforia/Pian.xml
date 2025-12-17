@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="pianagain" size="1.000000 0.562500" />
+    <ImageTarget name="pian8" size="1.000000 1.777778" />
+    <ImageTarget name="piano7" size="1.000000 1.778643" />
+    <ImageTarget name="piano6" size="1.000000 1.778643" />
+    <ImageTarget name="piano5" size="1.000000 1.778643" />
+    <ImageTarget name="piano4" size="1.000000 1.778643" />
+    <ImageTarget name="piano3" size="1.000000 1.778643" />
+    <ImageTarget name="piano2" size="1.000000 1.778643" />
+    <ImageTarget name="pian1" size="1.000000 1.777778" />
+  </Tracking>
+</QCARConfig>
