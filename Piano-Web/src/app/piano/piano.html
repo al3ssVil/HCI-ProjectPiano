@@ -1,0 +1,17 @@
+<div class="controls">
+  <button (click)="switchToFreeMode()">Free Mode</button>
+
+  <select (change)="selectMelody($event)">
+    <option value="" disabled selected>Select Melody</option>
+    <option *ngFor="let m of melodies">{{ m.name }}</option>
+  </select>
+</div>
+
+<div class="piano-container">
+  <div class="piano">
+    <div *ngFor="let note of notes" [class.white]="!note.name.includes('#')" [class.black]="note.name.includes('#')"
+      [class.active]="isActive(note.index)" [class.highlighted]="isHighlighted(note.index)">
+      {{ note.name }}
+    </div>
+  </div>
+</div>
