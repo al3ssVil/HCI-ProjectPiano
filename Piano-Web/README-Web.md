@@ -1,59 +1,120 @@
-# PianoWeb
+# Piano Web (Angular) — Live companion for the physical piano
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+This module is the **web-based companion app** for the physical ESP32 piano.  
+It receives live key events from the ESP32 via **Server‑Sent Events (SSE)** and provides:
 
-## Development server
+- **Free Play**: mirror the physical keys in real time
+- **Melody Mode**: guided, step‑by‑step practice for predefined note sequences
 
-To start a local development server, run:
+> The web app is **hardware-driven**: it reflects what the user plays on the real instrument (not a simulated piano).
+
+---
+
+## How it works (data flow)
+
+ESP32 exposes an SSE endpoint:
+
+- `http://<ESP32_IP>/sse`  (persistent HTTP stream)
+
+The browser connects using `EventSource` and updates the UI whenever a new event arrives.
+
+---
+
+## Prerequisites
+
+- Node.js + npm (or pnpm/yarn)
+- Angular CLI (optional; project can be run via npm scripts)
+
+---
+
+## Quick start
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open:
+- `http://localhost:4200/`
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Configure ESP32 SSE endpoint
 
-```bash
-ng generate component component-name
+You need the ESP32 on the same network as your computer and its IP address.
+
+Typical options:
+1. **Hardcode IP** in the service / component that creates the `EventSource`:
+   ```ts
+   const es = new EventSource("http://<ESP32_IP>/sse");
+   ```
+2. **Use environment files** (`src/environments/*.ts`) so you can switch dev/prod easily:
+   ```ts
+   export const environment = {
+     sseUrl: "http://<ESP32_IP>/sse"
+   };
+   ```
+
+Then:
+```ts
+new EventSource(environment.sseUrl);
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## App modes
 
-## Building
+### Free Play mode
+- Highlights the currently pressed key(s)
+- Optionally shows “last note” and/or a short history
+- No correctness checks (exploration + connectivity testing)
 
-To build the project run:
+### Melody mode
+- User selects a predefined melody (sequence of notes)
+- UI highlights **the next expected key**
+- Correct press advances the “step index”
+- Wrong press triggers temporary feedback (no full reset)
+
+This “tolerant” design supports learning and accessibility (beginners, older adults, users with motor impairments). fileciteturn0file0
+
+---
+
+## Implementation notes (what to look for in code)
+
+Core responsibilities described in the project documentation: fileciteturn0file0
+
+- `handleNote()` — process incoming note events from ESP32
+- `startMelody(notes)` — load melody + start guided session
+- `resetMelody()` — reset progress
+- `switchToFreeMode()` — back to free mode
+- `isActive()` / `isHighlighted()` — key highlighting logic
+
+If you’re cleaning up the codebase, a nice structure is:
+- `services/sse.service.ts` (connection + parsing)
+- `models/note-event.ts` (typed event contract)
+- `components/piano/` (visual + mode logic)
+
+---
+
+## Troubleshooting
+
+### CORS / blocked request
+If the ESP32 serves SSE without CORS headers and the web app is on a different origin, the browser may block the stream.
+Fix options:
+- Serve the Angular app from the same host (not typical for dev), or
+- Add permissive CORS headers on the ESP32 SSE response during development.
+
+### No events received
+- Ensure ESP32 is connected to Wi‑Fi and you’re using the correct IP
+- Try opening `http://<ESP32_IP>/sse` in a browser to confirm it streams
+- Verify the ESP32 firmware is broadcasting events
+
+---
+
+## Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Artifacts will be in `dist/`.
